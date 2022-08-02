@@ -1,0 +1,37 @@
+openapi: 3.0.0
+
+info:
+  title: item api
+  version: '1.0'
+
+servers:
+  - url: 'http://localhost:3000'
+
+paths:
+  /items/{itemId}:
+    parameters:
+      - schema:
+          type: string
+        name: itemId
+        in: path
+        required: true
+    get:
+      summary: get item
+      operationId: getItem
+      tags:
+        - item
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
