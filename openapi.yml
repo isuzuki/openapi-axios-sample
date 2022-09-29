@@ -8,6 +8,22 @@ servers:
   - url: 'http://localhost:3000'
 
 paths:
+  /items:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: 'object'
+              properties:
+                name:
+                  type: 'string'
+              required:
+                - name
+      responses:
+        '201':
+          description: CREATED
+
   /items/{itemId}:
     parameters:
       - schema:
@@ -29,9 +45,14 @@ paths:
                 type: object
                 properties:
                   item:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      name:
-                        type: string
+                    $ref: "#/components/schemas/Item"
+
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
