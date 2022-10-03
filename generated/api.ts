@@ -24,6 +24,19 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface CreateItemRequest
+ */
+export interface CreateItemRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateItemRequest
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
  * @interface GetItem200Response
  */
 export interface GetItem200Response {
@@ -53,19 +66,6 @@ export interface Item {
      */
     'name'?: string;
 }
-/**
- * 
- * @export
- * @interface ItemsPostRequest
- */
-export interface ItemsPostRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ItemsPostRequest
-     */
-    'name': string;
-}
 
 /**
  * DefaultApi - axios parameter creator
@@ -75,11 +75,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @param {ItemsPostRequest} [itemsPostRequest] 
+         * @param {CreateItemRequest} [createItemRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        itemsPost: async (itemsPostRequest?: ItemsPostRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createItem: async (createItemRequest?: CreateItemRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -99,7 +99,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(itemsPostRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createItemRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -118,12 +118,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {ItemsPostRequest} [itemsPostRequest] 
+         * @param {CreateItemRequest} [createItemRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async itemsPost(itemsPostRequest?: ItemsPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.itemsPost(itemsPostRequest, options);
+        async createItem(createItemRequest?: CreateItemRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createItem(createItemRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -138,12 +138,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @param {ItemsPostRequest} [itemsPostRequest] 
+         * @param {CreateItemRequest} [createItemRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        itemsPost(itemsPostRequest?: ItemsPostRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.itemsPost(itemsPostRequest, options).then((request) => request(axios, basePath));
+        createItem(createItemRequest?: CreateItemRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.createItem(createItemRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -157,13 +157,13 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 export class DefaultApi extends BaseAPI {
     /**
      * 
-     * @param {ItemsPostRequest} [itemsPostRequest] 
+     * @param {CreateItemRequest} [createItemRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public itemsPost(itemsPostRequest?: ItemsPostRequest, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).itemsPost(itemsPostRequest, options).then((request) => request(this.axios, this.basePath));
+    public createItem(createItemRequest?: CreateItemRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).createItem(createItemRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

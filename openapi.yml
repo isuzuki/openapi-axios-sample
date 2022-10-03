@@ -10,6 +10,7 @@ servers:
 paths:
   /items:
     post:
+      operationId: 'CreateItem'
       requestBody:
         content:
           application/json:
